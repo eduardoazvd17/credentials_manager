@@ -9,6 +9,7 @@ import 'models/credential_model.dart';
 
 /// A library to easy manage your app credentials
 class CredentialsManager {
+  late final LocalAuthentication _auth;
   late final FlutterSecureStorage _storage;
 
   /// The identifier of the secure storage.
@@ -16,19 +17,18 @@ class CredentialsManager {
 
   CredentialsManager({
     required this.storageKey,
-  }) : _storage = const FlutterSecureStorage();
+  })  : _auth = LocalAuthentication(),
+        _storage = const FlutterSecureStorage();
 
   /// Returns true if device is capable of checking biometrics.
   Future<bool> canCheckBiometrics() async {
-    final LocalAuthentication auth = LocalAuthentication();
-    return await auth.canCheckBiometrics;
+    return await _auth.canCheckBiometrics;
   }
 
   /// Returns true if device is capable of checking biometrics or is able to
   /// fail over to device credentials.
   Future<bool> isDeviceSupportedByAuth() async {
-    final LocalAuthentication auth = LocalAuthentication();
-    return await auth.isDeviceSupported();
+    return await _auth.isDeviceSupported();
   }
 
   /// Authenticates the user with biometrics available on the device while also
@@ -47,14 +47,13 @@ class CredentialsManager {
     bool biometricOnly = false,
     bool cannotAuthResult = false,
   }) async {
-    final LocalAuthentication auth = LocalAuthentication();
-    final bool isAvailable = await auth.canCheckBiometrics;
-    final bool isDeviceSupported = await auth.isDeviceSupported();
+    final bool isAvailable = await _auth.canCheckBiometrics;
+    final bool isDeviceSupported = await _auth.isDeviceSupported();
     final bool canAuthenticate = isAvailable && isDeviceSupported;
 
     if (canAuthenticate) {
       try {
-        final bool didAuthenticate = await auth.authenticate(
+        final bool didAuthenticate = await _auth.authenticate(
           localizedReason: authReasonMessage,
           options: AuthenticationOptions(
             biometricOnly: biometricOnly,
