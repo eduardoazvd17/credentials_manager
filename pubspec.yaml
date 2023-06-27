@@ -1,7 +1,7 @@
 name: credentials_manager
 description: A library to easy manage your app credentials
 version: 1.0.0
-homepage:
+repository: https://github.com/eduardoazvd17/credentials_manager
 
 environment:
   sdk: '>=2.19.6 <3.0.0'
