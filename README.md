@@ -9,7 +9,7 @@ A library to easy manage your app credentials
 1 - Import library on pubspec.yaml:
 ```yaml
 dependencies:
-  credentials_manager: ^1.0.0
+  credentials_manager: ^1.0.1
 ```
 
 2 - Configuration for Android devices:

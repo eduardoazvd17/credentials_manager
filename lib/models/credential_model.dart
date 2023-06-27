@@ -17,7 +17,7 @@ class CredentialModel extends Equatable {
     this.imageUrl,
   });
 
-  factory CredentialModel.fromMap(Map<String, String?> map) {
+  factory CredentialModel.fromMap(Map<String, dynamic> map) {
     return CredentialModel(
       id: map['id']!,
       loginOrEmail: map['loginOrEmail']!,
@@ -38,7 +38,7 @@ class CredentialModel extends Equatable {
   }
 
   factory CredentialModel.fromJson(String json) {
-    final map = Map<String, String?>.from(jsonDecode(json));
+    final map = Map<String, dynamic>.from(jsonDecode(json));
     return CredentialModel.fromMap(map);
   }
 

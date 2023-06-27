@@ -78,7 +78,7 @@ class CredentialsManager {
   Future<void> saveCredential(CredentialModel credentialModel) async {
     final String? jsonData = await _storage.read(key: storageKey);
     if (jsonData != null) {
-      final data = List<Map<String, String?>>.from(jsonDecode(jsonData));
+      final data = List<Map<String, dynamic>>.from(jsonDecode(jsonData));
       final List<CredentialModel> credentials =
           data.map((e) => CredentialModel.fromMap(e)).toList();
 
@@ -97,7 +97,7 @@ class CredentialsManager {
   Future<List<CredentialModel>> getSavedCredentials() async {
     final String? jsonData = await _storage.read(key: storageKey);
     if (jsonData != null) {
-      final data = List<Map<String, String?>>.from(jsonDecode(jsonData));
+      final data = List<Map<String, dynamic>>.from(jsonDecode(jsonData));
       final List<CredentialModel> credentials =
           data.map((e) => CredentialModel.fromMap(e)).toList();
       return credentials;
@@ -110,7 +110,7 @@ class CredentialsManager {
   Future<void> removeCredential(CredentialModel credentialModel) async {
     final String? jsonData = await _storage.read(key: storageKey);
     if (jsonData != null) {
-      final data = List<Map<String, String?>>.from(jsonDecode(jsonData));
+      final data = List<Map<String, dynamic>>.from(jsonDecode(jsonData));
       final List<CredentialModel> credentials =
           data.map((e) => CredentialModel.fromMap(e)).toList();
       if (credentials.contains(credentialModel)) {
