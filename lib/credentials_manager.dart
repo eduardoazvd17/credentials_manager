@@ -3,6 +3,7 @@ library credentials_manager;
 export 'models/credential_model.dart';
 
 import 'dart:convert';
+import 'dart:html';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:local_auth/local_auth.dart';
 import 'models/credential_model.dart';
@@ -80,6 +81,19 @@ class CredentialsManager {
     } else {
       final List<CredentialModel> credentials = [credentialModel];
       _storage.write(key: storageKey, value: credentials.toString());
+    }
+  }
+
+  /// Get all credentials saved
+  Future<List<CredentialModel>> getSavedCredentials() async {
+    final String? jsonData = await _storage.read(key: storageKey);
+    if (jsonData != null) {
+      final data = List<Map<String, String?>>.from(jsonDecode(jsonData));
+      final List<CredentialModel> credentials =
+          data.map((e) => CredentialModel.fromMap(e)).toList();
+      return credentials;
+    } else {
+      return [];
     }
   }
 
