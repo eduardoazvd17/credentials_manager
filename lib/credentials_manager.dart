@@ -18,7 +18,9 @@ class CredentialsManager {
   CredentialsManager({
     required this.storageKey,
   })  : _auth = LocalAuthentication(),
-        _storage = const FlutterSecureStorage();
+        _storage = const FlutterSecureStorage(
+          aOptions: AndroidOptions(encryptedSharedPreferences: true),
+        );
 
   /// Returns true if device is capable of checking biometrics.
   Future<bool> canCheckBiometrics() async {
