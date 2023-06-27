@@ -46,6 +46,10 @@ class CredentialModel extends Equatable {
     return jsonEncode(toMap());
   }
 
+  factory CredentialModel.fromString(String json) {
+    return CredentialModel.fromJson(json);
+  }
+
   @override
   String toString() => toJson();
 

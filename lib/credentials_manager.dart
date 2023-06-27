@@ -3,7 +3,6 @@ library credentials_manager;
 export 'models/credential_model.dart';
 
 import 'dart:convert';
-import 'dart:html';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:local_auth/local_auth.dart';
 import 'models/credential_model.dart';
@@ -40,9 +39,13 @@ class CredentialsManager {
   ///
   /// [biometricOnly] Prevent authentications from using non-biometric
   /// local authentication such as pin, passcode, or pattern.
+  ///
+  /// [cannotAuthResult] Use this parameter to ignore if the user's device
+  /// does not have biometrics available or is not compatible.
   Future<bool> requestAuth({
     String authReasonMessage = 'Please authenticate to continue.',
     bool biometricOnly = false,
+    bool cannotAuthResult = false,
   }) async {
     final LocalAuthentication auth = LocalAuthentication();
     final bool isAvailable = await auth.canCheckBiometrics;
@@ -62,7 +65,7 @@ class CredentialsManager {
         return false;
       }
     }
-    return false;
+    return cannotAuthResult;
   }
 
   /// Save credential in a secure local storage.
