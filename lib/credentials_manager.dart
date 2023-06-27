@@ -17,9 +17,14 @@ class CredentialsManager {
 
   CredentialsManager({
     required this.storageKey,
+
+    /// EncryptedSharedPrefences are only available on API 23 and greater
+    bool useAndroidEncryptedSharedPreferences = false,
   })  : _auth = LocalAuthentication(),
-        _storage = const FlutterSecureStorage(
-          aOptions: AndroidOptions(encryptedSharedPreferences: true),
+        _storage = FlutterSecureStorage(
+          aOptions: AndroidOptions(
+            encryptedSharedPreferences: useAndroidEncryptedSharedPreferences,
+          ),
         );
 
   /// Returns true if device is capable of checking biometrics.
