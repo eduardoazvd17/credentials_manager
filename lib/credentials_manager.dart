@@ -84,7 +84,7 @@ class CredentialsManager {
     }
   }
 
-  /// Get all credentials saved
+  /// Get all saved credentials
   Future<List<CredentialModel>> getSavedCredentials() async {
     final String? jsonData = await _storage.read(key: storageKey);
     if (jsonData != null) {
