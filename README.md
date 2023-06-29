@@ -58,11 +58,45 @@ import 'package:credentials_manager/credentials_manager.dart';
 
 5 - Usage:
 ```dart
+/// Creating credentials manager instance.
 final credentialsManager = CredentialsManager(
-    /// The identifier of the secure storage.
-    storageKey: 'key',
+  /// The identifier of the secure storage.
+  storageKey: 'key',
+  /// EncryptedSharedPrefences are only available on API 23 and greater.
+  useAndroidEncryptedSharedPreferences: true
+);
 
-    /// EncryptedSharedPrefences are only available on API 23 and greater.
-    useAndroidEncryptedSharedPreferences: true
+/// Creating a new credential model.
+final credentialModel = CredentialsModel(
+  id: 'user_id', // REQUIRED
+  loginOrEmail: 'user_login', // REQUIRED
+  password: 'user_password', // REQUIRED
+  name: 'user_name', // OPTIONAL
+  imageUrl: 'user_image_url', // OPTIONAL
+);
+
+/// Saving credential
+credentialsManager.saveCredential(credentialModel);
+
+/// Loading all saved credentials.
+List<CredentialModel> savedCredentials = await credentialsManager.getSavedCredentials();
+
+/// Removing a single credential.
+credentialsManager.removeCredential(credentialModel);
+
+/// Removing all saved credentials.
+credentialsManager.removeAllCredentials();
+
+/// Requesting auth.
+final bool isAuth = await credentialsManager.requestAuth(
+  /// Message to show to user while prompting them for authentication.
+  authReasonMessage: 'Please authenticate to continue.',
+  /// Prevent authentications from using non-biometric
+  /// local authentication such as pin, passcode, or pattern.
+  biometricOnly: false,
+  /// Use this parameter to ignore if the user's device
+  /// does not have biometrics available or is not compatible.
+  cannotAuthResult: false,
 );
 ```
+
