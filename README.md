@@ -79,7 +79,7 @@ final credentialModel = CredentialsModel(
 credentialsManager.saveCredential(credentialModel);
 
 /// Loading all saved credentials.
-List<CredentialModel> savedCredentials = await credentialsManager.getSavedCredentials();
+final List<CredentialModel> savedCredentials = await credentialsManager.getSavedCredentials();
 
 /// Removing a single credential.
 credentialsManager.removeCredential(credentialModel);
