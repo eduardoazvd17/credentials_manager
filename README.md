@@ -75,7 +75,7 @@ final credentialModel = CredentialsModel(
   imageUrl: 'user_image_url', // OPTIONAL
 );
 
-/// Saving credential
+/// Saving credential.
 credentialsManager.saveCredential(credentialModel);
 
 /// Loading all saved credentials.
