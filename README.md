@@ -61,7 +61,7 @@ import 'package:credentials_manager/credentials_manager.dart';
 /// Creating credentials manager instance.
 final credentialsManager = CredentialsManager(
   /// The identifier of the secure storage.
-  storageKey: 'key',
+  storageKey: 'storage_key',
   /// EncryptedSharedPrefences are only available on API 23 and greater.
   useAndroidEncryptedSharedPreferences: true
 );
@@ -76,16 +76,16 @@ final credentialModel = CredentialsModel(
 );
 
 /// Saving credential.
-credentialsManager.saveCredential(credentialModel);
+await credentialsManager.saveCredential(credentialModel);
 
 /// Loading all saved credentials.
 final List<CredentialModel> savedCredentials = await credentialsManager.getSavedCredentials();
 
 /// Removing a single credential.
-credentialsManager.removeCredential(credentialModel);
+await credentialsManager.removeCredential(credentialModel);
 
 /// Removing all saved credentials.
-credentialsManager.removeAllCredentials();
+await credentialsManager.removeAllCredentials();
 
 /// Requesting auth.
 final bool isAuth = await credentialsManager.requestAuth(
