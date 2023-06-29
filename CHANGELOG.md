@@ -1,3 +1,6 @@
+## 1.0.3
+* Improving documentation
+
 ## 1.0.2
 * Improving documentation
 

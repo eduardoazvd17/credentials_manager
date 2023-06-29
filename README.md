@@ -67,7 +67,7 @@ final credentialsManager = CredentialsManager(
 );
 
 /// Creating a new credential model.
-final credentialModel = CredentialsModel(
+final credentialModel = CredentialModel(
   id: 'user_id', // REQUIRED
   loginOrEmail: 'user_login', // REQUIRED
   password: 'user_password', // REQUIRED
